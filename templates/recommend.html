@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Recommendations | Learnify.AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+<section class="recommend-page">
+  <h1>🎥 Learnify.AI Recommendations</h1>
+
+  <div class="query-summary">
+    <p><strong>Your Query:</strong> {{ query }}</p>
+    <p><strong>Mood:</strong> {{ mood | title }} | Score: {{ sentiment }}</p>
+    <p><strong>Topic:</strong> {{ topic }}</p>
+  </div>
+
+  <div class="recommend-list">
+    {% for vid in videos %}
+    <div class="recommend-card">
+      <img src="{{ vid.thumbnail }}" alt="{{ vid.title }}" style="width:100%;border-radius:10px;" />
+      <h3>{{ vid.title }}</h3>
+      <a href="{{ vid.url }}" target="_blank"><button>Watch on YouTube</button></a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- 🧠 Feedback Section -->
+  <section class="feedback-section">
+    <h3>Was this recommendation helpful?</h3>
+    <div class="feedback-buttons">
+      <button id="yes-btn" class="feedback-btn yes">👍 Yes</button>
+      <button id="no-btn" class="feedback-btn no">👎 No</button>
+    </div>
+
+    <div id="feedback-box" class="feedback-box" style="display:none;">
+      <form action="/feedback" method="POST">
+        <input type="hidden" name="query" value="{{ query }}">
+        <input type="hidden" id="feedback-choice" name="feedback">
+        <textarea name="feedback_text" placeholder="Please share your thoughts..."></textarea>
+        <button type="submit" class="cta-btn">💬 Submit Feedback</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="back-home">
+    <a href="/">← Back to Home</a>
+  </div>
+</section>
+
+<!-- 💡 Feedback JS -->
+<script>
+document.getElementById("yes-btn").onclick = () => {
+  document.getElementById("feedback-choice").value = "Yes";
+  document.getElementById("feedback-box").style.display = "block";
+};
+document.getElementById("no-btn").onclick = () => {
+  document.getElementById("feedback-choice").value = "No";
+  document.getElementById("feedback-box").style.display = "block";
+};
+</script>
+</body>
+</html>

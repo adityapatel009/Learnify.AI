@@ -1,0 +1,4 @@
+flask
+gunicorn
+textblob
+requests

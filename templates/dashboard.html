@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Learnify.AI</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 { color: #00bfff; }
+    .chart-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    canvas {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,191,255,0.3);
+      width: 400px !important;
+      height: 400px !important;
+    }
+    table {
+      width: 85%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    th {
+      color: #ffd700;
+      background: rgba(255,255,255,0.1);
+    }
+    tr:hover { background: rgba(255,255,255,0.05); }
+    a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>👋 Welcome, {{ user }}</h1>
+  <a href="/logout">Logout</a>
+  <div style="margin-top:20px;">
+    <a href="/" class="home-btn">🏠 Back to Home</a>
+  </div>
+
+  <div class="chart-container">
+    <div>
+      <h3>📊 Queries by Topic</h3>
+      <canvas id="topicChart"></canvas>
+    </div>
+    <div>
+      <h3>😊 Mood Distribution</h3>
+      <canvas id="moodChart"></canvas>
+    </div>
+  </div>
+
+  <h3 style="margin-top:30px;">Your Feedback History</h3>
+  {% if history %}
+  <table>
+    <tr><th>Query</th><th>Topic</th><th>Mood</th><th>Feedback</th></tr>
+    {% for q,t,m,f in history %}
+    <tr>
+      <td>{{ q }}</td>
+      <td>{{ t }}</td>
+      <td>{{ m }}</td>
+      <td>{{ f or "—" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No feedback yet. Try exploring some topics!</p>
+  {% endif %}
+
+  <!-- 🎨 Chart Script -->
+  <script>
+    const topicData = {{ topic_data | tojson | safe }};
+    const moodData = {{ mood_data | tojson | safe }};
+    console.log("🧩 Topic:", topicData);
+    console.log("🧠 Mood:", moodData);
+
+    if (Object.keys(topicData).length) {
+      new Chart(document.getElementById('topicChart'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(topicData),
+          datasets: [{
+            label: 'Queries per Topic',
+            data: Object.values(topicData),
+            backgroundColor: '#00bfff'
+          }]
+        },
+        options: { plugins: { legend: { display: false } } }
+      });
+    }
+
+    if (Object.keys(moodData).length) {
+      new Chart(document.getElementById('moodChart'), {
+        type: 'pie',
+        data: {
+          labels: Object.keys(moodData),
+          datasets: [{
+            data: Object.values(moodData),
+            backgroundColor: ['#00bfff', '#ffd700', '#ff6347']
+          }]
+        }
+      });
+    }
+  </script>
+</body>
+</html>
