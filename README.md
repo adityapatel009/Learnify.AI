@@ -46,12 +46,19 @@ Built using **Flask**, it integrates **YouTube API** for real video suggestions 
 
 ### 🏠 Home Page  
 
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/65d83e44-2794-4ec8-99b6-1a21e41c9ad5" />
 
 ### 📊 Dashboard  
-![Dashboard](static/images/dashboard-preview.png)
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/129b8307-5813-4c10-8749-362e23a9cdd2" />
 
 ### 💡 Recommendation Page  
-![Recommendation](static/images/recommend-preview.png)
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/8e38928a-cbba-40d4-bbbc-0116fe106937" />
+### Explore by Category
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/47b3e31f-2770-4013-8682-e6e35a3ddca2" />
+
+###
+Your Feedback History
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/dfb5cb11-a35b-4e27-915c-ff7f17deec3b" />
 
 ---
 
