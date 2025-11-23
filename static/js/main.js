@@ -67,3 +67,32 @@ window.addEventListener("scroll", () => {
   if (window.scrollY > 30) navbar.classList.add("scrolled");
   else navbar.classList.remove("scrolled");
 });
+// 🌟 Quick Learn Carousel + Quotes
+const slides = document.querySelectorAll(".slide");
+const quotes = [
+  "“The best way to predict the future is to invent it.”",
+  "“Learning never exhausts the mind.”",
+  "“An investment in knowledge pays the best interest.”",
+  "“The expert in anything was once a beginner.”",
+  "“Don’t watch the clock; do what it does. Keep going.”"
+];
+
+let slideIndex = 0;
+let quoteIndex = 0;
+
+function rotateSlides() {
+  slides.forEach((s, i) => s.classList.toggle("active", i === slideIndex));
+  slideIndex = (slideIndex + 1) % slides.length;
+}
+function rotateQuotes() {
+  const quoteText = document.getElementById("quote-text");
+  quoteText.style.opacity = 0;
+  setTimeout(() => {
+    quoteText.textContent = quotes[quoteIndex];
+    quoteText.style.opacity = 1;
+    quoteIndex = (quoteIndex + 1) % quotes.length;
+  }, 400);
+}
+
+setInterval(rotateSlides, 3000);
+setInterval(rotateQuotes, 5000);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Learnify.AI | Tech Learning Recommender</title>
@@ -14,11 +15,17 @@
   <ul class="nav-links">
     <li><a href="#explore">Explore</a></li>
     <li><a href="#query">Recommendations</a></li>
-    <li><a href="/dashboard">Dashboard</a></li>
-  </ul>
+    </ul>
+    
   <div class="auth-buttons">
+    {% if session.get('user') %}
+    <span class="welcome-text">👋 Welcome, {{ session.user }}</span>
+      <a href="/dashboard" class="login-btn">Dashboard</a>
+      <a href="/logout" class="signup-btn">Logout</a>
+    {% else %}
     <a href="/login" class="login-btn">Login</a>
-    <a href="/signup" class="signup-btn">Sign Up</a>
+    <a href="/signup" class="signup-btn">Create Account</a>
+     {% endif %}
   </div>
   <div class="menu-toggle" id="menu-toggle">☰</div>
 </nav>
@@ -31,14 +38,44 @@
       Your personalized AI-powered learning companion — explore, learn, and grow with the future of tech.
     </p>
     <div class="hero-buttons">
-      <a href="#explore" class="cta-btn">🚀 Get Started</a>
-      <a href="/signup" class="cta-btn secondary">Create Account</a>
-    </div>
+  <a href="#explore" class="cta-btn">🚀 Get Started</a>
+  {% if not session.get('user') %}
+    <a href="/signup" class="cta-btn secondary">Create Account</a>
+  {% endif %}
+</div>
+
   </div>
   <div class="hero-image">
     <img src="{{ url_for('static', filename='images/ai-boy.png') }}" alt="AI Assistant" />
   </div>
 </header>
+<!-- ⚡ Quick Learn + Motivation Section -->
+<section class="quicklearn-section scroll-reveal">
+  <div class="pulse-logo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Learnify.AI Logo" />
+  </div>
+
+  <div class="quicklearn-container">
+    <!-- Left: Carousel -->
+    <div class="carousel">
+      <h2>🔥 Quick Learn Topics</h2>
+      <div class="carousel-items">
+        <div class="slide active">🤖 Artificial Intelligence</div>
+        <div class="slide">☁️ Cloud Computing</div>
+        <div class="slide">💻 Data Science</div>
+        <div class="slide">⚙️ Machine Learning</div>
+        <div class="slide">🧠 Deep Learning</div>
+      </div>
+    </div>
+
+    <!-- Right: Quotes -->
+    <div class="quotes">
+      <h2>💡 Learning Quotes</h2>
+      <p id="quote-text">“The best way to predict the future is to invent it.”</p>
+    </div>
+  </div>
+</section>
+
   <!-- ⚡ Features Section -->
   <section class="features scroll-reveal" id="features">
     <h2>Why Choose <span class="highlight">Learnify.AI</span>?</h2>
@@ -60,6 +97,43 @@
       </div>
     </div>
   </section>
+  <!-- 📈 AI Learning Insights Section -->
+<section class="insights-section scroll-reveal">
+  <h2>📊 Learnify.AI in Numbers</h2>
+  <div class="insight-grid">
+    <div class="insight-box">
+      <h3>1,200+</h3>
+      <p>Personalized Recommendations</p>
+    </div>
+    <div class="insight-box">
+      <h3>50+</h3>
+      <p>AI & Tech Topics Covered</p>
+    </div>
+    <div class="insight-box">
+      <h3>300+</h3>
+      <p>Happy Learners</p>
+    </div>
+  </div>
+</section>
+
+<!-- 🤖 Meet Your AI Assistant Section -->
+<section class="ai-assistant scroll-reveal">
+  <div class="assistant-container">
+    <div class="assistant-avatar">
+      <img src="{{ url_for('static', filename='images/ai-boy.png') }}" alt="AI Assistant" />
+    </div>
+    <div class="assistant-dialog">
+      <h2>🤖 Meet Your AI Assistant</h2>
+      <p>
+        Hi there! 👋 I’m your personal AI learning companion.  
+        I’ll help you explore new topics, recommend the best resources,  
+        and make your learning journey smarter and fun!
+      </p>
+      <a href="#query" class="cta-btn">Ask Me Something</a>
+    </div>
+  </div>
+</section>
+
   <!-- 🧭 Explore Categories -->
   <section id="explore" class="explore-section">
     <h2>✨ Explore by Category</h2>

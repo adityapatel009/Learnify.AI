@@ -93,7 +93,7 @@ def login():
         if user:
             session["user"] = username
             flash(f"Welcome back, {username}!", "success")
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("home"))
         else:
             flash("❌ Invalid username or password!", "error")
             return redirect(url_for("login"))
@@ -192,7 +192,6 @@ def save_feedback():
 
     flash("✅ Thank you for your feedback!", "success")
     return redirect(url_for("dashboard"))
-
 # -------------------- TEST ROUTE --------------------
 @app.route("/test")
 def test():
