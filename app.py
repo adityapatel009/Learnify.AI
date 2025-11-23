@@ -196,6 +196,10 @@ def save_feedback():
 @app.route("/test")
 def test():
     return "<h3>✅ Flask route working!</h3>"
+@app.route("/googleaeda7ebb328ce6ea.html")
+def google_verify():
+    return "google-site-verification: googleaeda7ebb328ce6ea.html"
+
 
 # -------------------- MAIN APP --------------------
 if __name__ == "__main__":
