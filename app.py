@@ -199,8 +199,6 @@ def test():
 @app.route("/googleaeda7ebb328ce6ea.html")
 def google_verify():
     return "google-site-verification: googleaeda7ebb328ce6ea.html"
-
-
 # -------------------- MAIN APP --------------------
 if __name__ == "__main__":
     app.run(debug=True, port=5050)
